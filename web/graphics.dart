@@ -49,14 +49,25 @@ class BrainRenderer extends Renderer {
     context.stroke();
     context.closePath();
 
+    context.fillStyle = '#ff0';
+    context.font = '6pt Arial';
+
     if (reactor.objects != null) {
       for (var object in reactor.objects) {
+        var x = 250 + object.delta.x, y = 250 + object.delta.y;
+
+        var dir = object.velocity.normalized() * (object.radius + 3);
+
         context.strokeStyle = 'rgba(255, 255, 0, ${1.0 - object.staleness / 3.0})';
 
         context.beginPath();
-        context.arc(250 + object.delta.x, 250 + object.delta.y, object.radius, 0, PI * 2, false);
+        context.arc(x, y, object.radius, 0, PI * 2, false);
+        context.moveTo(x, y);
+        context.lineTo(x + dir.x, y + dir.y);
         context.stroke();
         context.closePath();
+
+        context.fillText('id: ${object.objectId}', x + object.radius + 3, y + object.radius);
       }
     }
   }
@@ -91,6 +102,15 @@ class UniverseRenderer extends Renderer {
       context.arc(e.position.x, e.position.y, e.radius, 0, PI * 2, false);
       context.fill();
       context.closePath();
+
+      if (e.brain != null) {
+        context.globalAlpha = .2;
+        context.beginPath();
+        context.arc(e.position.x, e.position.y, 200, 0, PI * 2, false);
+        context.fill();
+        context.closePath();
+        context.globalAlpha = 1;
+      }
     }
   }
 }

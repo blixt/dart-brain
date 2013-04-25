@@ -16,7 +16,7 @@ class Vector {
   Vector dot(Vector other) => new Vector(x * other.x, y * other.y);
   Vector normalized() {
     var len = length();
-    new Vector(x / len, y / len);
+    return new Vector(x / len, y / len);
   }
   
   num length() {
