@@ -2,6 +2,7 @@ import 'dart:html';
 import 'dart:math';
 
 import 'ai/ai.dart';
+import 'ai/approach/approach.dart';
 import 'ai/detection/detection.dart';
 import 'universe.dart';
 
@@ -49,40 +50,64 @@ class BrainRenderer extends Renderer {
     context.stroke();
     context.closePath();
 
-    context.fillStyle = '#ff0';
+    if (!reactor.ready) return;
+
     context.font = '6pt Arial';
 
-    if (reactor.objects != null) {
-      for (var object in reactor.objects) {
-        var x = 250 + object.delta.x, y = 250 + object.delta.y;
+    // Render approaches of objects.
+    context.strokeStyle = '#888';
+    context.fillStyle = '#888';
+    
+    for (ObjectApproaching approach in reactor.approaches) {
+      context.beginPath();
+      context.moveTo(250, 250);
+      context.lineTo(250 + approach.delta.x, 250 + approach.delta.y);
+      context.stroke();
+      context.closePath();
+      
+      Vector halfway = approach.delta / 2;
+      var label = 'distance: ${approach.delta.length().toStringAsFixed(2)} '
+                  'approachSpeed: ${approach.approachSpeed.toStringAsFixed(2)}';
+      context.fillText(label, 250 + halfway.x, 250 + halfway.y);
+    }
+    
+    // Render objects.
+    context.fillStyle = '#ff0';
 
-        var dir = object.velocity.normalized() * (object.radius + 3);
+    for (ObjectVisible object in reactor.objects) {
+      var x = 250 + object.delta.x, y = 250 + object.delta.y;
 
-        context.strokeStyle = 'rgba(255, 255, 0, ${1.0 - object.staleness / 3.0})';
+      var dir = object.velocity.normalized() * (object.radius + 3);
 
-        context.beginPath();
-        context.arc(x, y, object.radius, 0, PI * 2, false);
-        context.moveTo(x, y);
-        context.lineTo(x + dir.x, y + dir.y);
-        context.stroke();
-        context.closePath();
+      context.strokeStyle = 'rgba(255, 255, 0, ${1.0 - object.staleness / 3.0})';
 
-        context.fillText('id: ${object.objectId}', x + object.radius + 3, y + object.radius);
-      }
+      context.beginPath();
+      context.arc(x, y, object.radius, 0, PI * 2, false);
+      context.moveTo(x, y);
+      context.lineTo(x + dir.x, y + dir.y);
+      context.stroke();
+      context.closePath();
+
+      context.fillText('id: ${object.objectId}', x + object.radius + 3, y + object.radius);
     }
   }
 }
 
 class BrainRendererReactor extends Reactor {
+  bool ready = false;
+  List<ObjectApproaching> approaches;
   List<ObjectVisible> objects;
   
   BrainRendererReactor();
   
   beforeStep() {
+    approaches = <ObjectApproaching>[];
     objects = <ObjectVisible>[];
+    ready = true;
   }
   
   react(Stimulations stims) {
+    approaches.addAll(stims.ofType(ObjectApproaching));
     objects.addAll(stims.ofType(ObjectVisible));
   }
 }
