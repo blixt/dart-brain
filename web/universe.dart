@@ -42,15 +42,15 @@ class Universe implements Iterable<Entity> {
       
       // Wrap entities around the universe.
       if (entity.position.x - entity.radius > size.x) {
-        entity.position -= new Vector(size.x, 0);
+        entity.position -= new Vector(size.x + entity.radius * 2, 0);
       } else if (entity.position.x + entity.radius < 0) {
-        entity.position += new Vector(size.x, 0);
+        entity.position += new Vector(size.x + entity.radius * 2, 0);
       }
       
       if (entity.position.y - entity.radius > size.y) {
-        entity.position -= new Vector(0, size.y);
+        entity.position -= new Vector(0, size.y + entity.radius * 2);
       } else if (entity.position.y + entity.radius < 0) {
-        entity.position += new Vector(0, size.y);
+        entity.position += new Vector(0, size.y + entity.radius * 2);
       }
     }
     
