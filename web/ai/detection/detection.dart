@@ -102,10 +102,12 @@ class DetectorReactor extends Reactor {
     for (Blip blip in blips) {
       objects.add(new ObjectMeta(nextId++, blip));
     }
+
+    // Remove stale objects.
+    objects.removeWhere((o) => o.inactivity > MAX_INACTIVITY);
     
     // Create stimulations for all the known objects.
     for (ObjectMeta object in objects) {
-      if (object.inactivity > MAX_INACTIVITY) continue;
       stims.stimulate(new ObjectVisible(object.id, object.getProjectedDelta(), object.velocity, object.blip.radius, object.inactivity));
     }
     
