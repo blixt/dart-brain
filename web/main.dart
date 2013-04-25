@@ -28,8 +28,12 @@ main() {
   u.addEntity(new Entity(new Vector(250, 250), brain: b, radius: 5));
 
   // Render the universe.
-  UniverseRenderer r = new UniverseRenderer(u, query('#viewport'));
-  r.start();
+  var ur = new UniverseRenderer(u, query('#universe'));
+  ur.start();
+
+  // Render the brain.
+  var br = new BrainRenderer(b, query('#brain'));
+  br.start();
 
   // Update the universe.
   new Timer.periodic(const Duration(milliseconds: 50), (Timer _) {
