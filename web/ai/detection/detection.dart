@@ -63,6 +63,7 @@ class DetectorReactor extends Reactor {
     var nextId = this.get('', 'nextId');
     
     if (objects == null) {
+      if (false) return;
       objects = <ObjectMeta>[];
       nextId = 1;
       this.set('', 'objects', objects);

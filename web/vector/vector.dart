@@ -4,6 +4,7 @@ import 'dart:math';
 
 class Vector {
   final num x, y;
+  num _length;
 
   Vector(this.x, this.y);
 
@@ -19,7 +20,10 @@ class Vector {
   }
   
   num length() {
-    return sqrt(x * x + y * y);
+    if (_length == null) {
+      _length = sqrt(x * x + y * y);
+    }
+    return _length;
   }
   
   toString() => 'Vector($x, $y)';

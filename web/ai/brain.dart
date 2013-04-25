@@ -1,12 +1,10 @@
 part of ai;
 
-class Brain extends Entity {
+class Brain {
   final List<Reactor> reactors = <Reactor>[];
   final Stimulations stimulations = new Stimulations();
   
-  Brain(position, radius) : super(position, radius);
-  
-  _step() {
+  step() {
     int i = 1;
     
     while (stimulations.hasMore) {
@@ -26,5 +24,5 @@ class Brain extends Entity {
     stimulations._reset();
   }
   
-  toString() => 'Brain(position=$position, radius=$radius, reactors=$reactors)';
+  toString() => 'Brain(reactors=$reactors)';
 }

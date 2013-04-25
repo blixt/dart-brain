@@ -8,5 +8,3 @@ part 'brain.dart';
 part 'entity.dart';
 part 'reactor.dart';
 part 'stimulation.dart';
-part 'world.dart';
-
