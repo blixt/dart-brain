@@ -63,7 +63,6 @@ class DetectorReactor extends Reactor {
     var nextId = this.get('', 'nextId');
     
     if (objects == null) {
-      if (false) return;
       objects = <ObjectMeta>[];
       nextId = 1;
       this.set('', 'objects', objects);
@@ -75,6 +74,9 @@ class DetectorReactor extends Reactor {
       // Increment the inactivity counter for the object.
       object.step();
       
+      // We may exhaust blips further down, so test for this case.
+      if (blips.length == 0) continue;
+
       // Find the closest blip.
       // TODO: Don't pick blips with a different radius.
       Vector v = object.getProjectedDelta();
@@ -83,7 +85,7 @@ class DetectorReactor extends Reactor {
         var distB = (v - b.delta).length();
         return distA < distB ? a : b;
       });
-      
+
       if ((v - closest.delta).length() < MAX_DISTANCE) {
         object.blip = closest;
         // TODO: If another object is projected to be even closer, the blip
