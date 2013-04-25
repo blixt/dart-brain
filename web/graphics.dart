@@ -2,6 +2,7 @@ import 'dart:html';
 import 'dart:math';
 
 import 'ai/ai.dart';
+import 'ai/detection/detection.dart';
 import 'universe.dart';
 
 abstract class Renderer {
@@ -48,12 +49,12 @@ class BrainRenderer extends Renderer {
     context.stroke();
     context.closePath();
 
-    context.strokeStyle = '#ff0';
-    
-    if (reactor.blips != null) {
-      for (var blip in reactor.blips) {
+    if (reactor.objects != null) {
+      for (var object in reactor.objects) {
+        context.strokeStyle = 'rgba(255, 255, 0, ${1.0 - object.staleness / 3.0})';
+
         context.beginPath();
-        context.arc(250 + blip.delta.x, 250 + blip.delta.y, blip.radius, 0, PI * 2, false);
+        context.arc(250 + object.delta.x, 250 + object.delta.y, object.radius, 0, PI * 2, false);
         context.stroke();
         context.closePath();
       }
@@ -62,13 +63,16 @@ class BrainRenderer extends Renderer {
 }
 
 class BrainRendererReactor extends Reactor {
-  List<Blip> blips;
+  List<ObjectVisible> objects;
   
   BrainRendererReactor();
   
+  beforeStep() {
+    objects = <ObjectVisible>[];
+  }
+  
   react(Stimulations stims) {
-    var list = stims.ofType(Blip).toList();
-    if (list.length > 0) blips = list;
+    objects.addAll(stims.ofType(ObjectVisible));
   }
 }
 

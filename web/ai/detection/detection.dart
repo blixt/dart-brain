@@ -106,7 +106,7 @@ class DetectorReactor extends Reactor {
     // Create stimulations for all the known objects.
     for (ObjectMeta object in objects) {
       if (object.inactivity > MAX_INACTIVITY) continue;
-      stims.stimulate(new ObjectVisible(object.id, object.blip.delta, object.velocity, object.blip.radius, object.inactivity));
+      stims.stimulate(new ObjectVisible(object.id, object.getProjectedDelta(), object.velocity, object.blip.radius, object.inactivity));
     }
     
     this.set('', 'nextId', nextId);

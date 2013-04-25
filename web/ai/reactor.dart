@@ -3,6 +3,8 @@ part of ai;
 abstract class Reactor {
   final Map<dynamic, Map<String, dynamic>> memory = new Map<dynamic, Map<String, dynamic>>();
   
+  void beforeStep() {}
+  
   get(context, key) {
     var value = memory[context];
     if (value == null) return null;

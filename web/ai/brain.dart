@@ -7,6 +7,10 @@ class Brain {
   step() {
     int i = 1;
     
+    for (Reactor r in reactors) {
+      r.beforeStep();
+    }
+    
     while (stimulations.hasMore) {
       stimulations._iteration();
       print('[brain.step] pass #$i');

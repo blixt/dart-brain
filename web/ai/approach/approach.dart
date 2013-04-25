@@ -6,6 +6,7 @@ import '../detection/detection.dart';
 class ObjectApproaching extends Stimulation {
   final int objectId;
   final Vector delta;
+  final Vector velocity;
   final num approachSpeed;
   
   ObjectApproaching(this.objectId, this.delta, this.velocity, this.approachSpeed);
