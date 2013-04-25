@@ -4,11 +4,13 @@ import '../ai.dart';
 import '../detection/detection.dart';
 
 class ObjectApproaching extends Stimulation {
-  int objectId;
+  final int objectId;
+  final num distance;
+  final num approachSpeed;
   
-  ObjectApproaching(this.objectId);
+  ObjectApproaching(this.objectId, this.distance, this.approachSpeed);
   
-  toString() => 'ObjectApproaching(objectId=$objectId)';
+  toString() => 'ObjectApproaching(objectId=$objectId, distance=$distance, approachSpeed=$approachSpeed)';
 }
 
 class ApproachReactor extends Reactor {
@@ -21,7 +23,7 @@ class ApproachReactor extends Reactor {
   
       if (prevDist != null && prevDist > dist) {
         // TODO: Treshold on the approach vector?
-        stims.stimulate(new ObjectApproaching(stim.objectId));
+        stims.stimulate(new ObjectApproaching(stim.objectId, dist, prevDist - dist));
       }
     }
   }
