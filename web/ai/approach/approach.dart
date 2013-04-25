@@ -8,9 +8,9 @@ class ObjectApproaching extends Stimulation {
   final Vector delta;
   final num approachSpeed;
   
-  ObjectApproaching(this.objectId, this.delta, this.approachSpeed);
+  ObjectApproaching(this.objectId, this.delta, this.velocity, this.approachSpeed);
   
-  toString() => 'ObjectApproaching(objectId=$objectId, delta=$delta, approachSpeed=$approachSpeed)';
+  toString() => 'ObjectApproaching(objectId=$objectId, delta=$delta, velocity=$velocity, approachSpeed=$approachSpeed)';
 }
 
 class ApproachReactor extends Reactor {
@@ -23,7 +23,7 @@ class ApproachReactor extends Reactor {
   
       if (prevDist != null && prevDist > dist) {
         // TODO: Treshold on the approach vector?
-        stims.stimulate(new ObjectApproaching(stim.objectId, stim.delta, prevDist - dist));
+        stims.stimulate(new ObjectApproaching(stim.objectId, stim.delta, stim.velocity, prevDist - dist));
       }
     }
   }

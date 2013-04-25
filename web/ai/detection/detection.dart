@@ -5,12 +5,13 @@ import '../ai.dart';
 class ObjectVisible extends Stimulation {
   final int objectId;
   final Vector delta;
+  final Vector velocity;
   final num radius;
   final int staleness;
 
-  ObjectVisible(this.objectId, this.delta, this.radius, this.staleness);
+  ObjectVisible(this.objectId, this.delta, this.velocity, this.radius, this.staleness);
   
-  toString() => 'ObjectVisible(objectId=$objectId, delta=$delta, radius=$radius, staleness=$staleness)';
+  toString() => 'ObjectVisible(objectId=$objectId, delta=$delta, velocity=$velocity, radius=$radius, staleness=$staleness)';
 }
 
 class ObjectMeta {
@@ -18,9 +19,12 @@ class ObjectMeta {
   /// The most recent location info of this object.
   Blip _blip;
   /// The delta between the last known delta and the delta before that.
-  Vector _deltaDelta = new Vector(0, 0);
+  Vector _velocity = new Vector(0, 0);
   /// The number of steps that the object has not been updated.
   int _inactivity = 0;
+  
+  /// The calculated velocity of the object.
+  Vector get velocity => _velocity;
   
   // Id is passed in rather than generated because the id should stay local to
   // the code that is using it.
@@ -31,7 +35,7 @@ class ObjectMeta {
   
   /// Sets the location info of this object.
   set blip(Blip value) {
-    _deltaDelta = value.delta - _blip.delta;
+    _velocity = value.delta - _blip.delta;
     _blip = value;
     _inactivity = 0;
   }
@@ -40,11 +44,11 @@ class ObjectMeta {
   int get inactivity => _inactivity;
   
   /// The delta of the object assuming it keeps moving as it did previously.
-  Vector getProjectedDelta() => _blip.delta + _deltaDelta * _inactivity;
+  Vector getProjectedDelta() => _blip.delta + _velocity * _inactivity;
   
   int step() => ++_inactivity;
   
-  toString() => 'ObjectMeta(id=$id, blip=$_blip)';
+  toString() => 'ObjectMeta(id=$id, blip=$_blip, velocity=$velocity)';
 }
 
 class DetectorReactor extends Reactor {
@@ -102,7 +106,7 @@ class DetectorReactor extends Reactor {
     // Create stimulations for all the known objects.
     for (ObjectMeta object in objects) {
       if (object.inactivity > MAX_INACTIVITY) continue;
-      stims.stimulate(new ObjectVisible(object.id, object.blip.delta, object.blip.radius, object.inactivity));
+      stims.stimulate(new ObjectVisible(object.id, object.blip.delta, object.velocity, object.blip.radius, object.inactivity));
     }
     
     this.set('', 'nextId', nextId);
