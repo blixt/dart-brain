@@ -59,7 +59,7 @@ class DetectorReactor extends Reactor {
 
     // Get data structures (next object id and list of objects) or create them
     // if they don't exist.
-    List<ObjectMeta> objects = this.get('', 'objects');
+    var objects = this.get('', 'objects');
     var nextId = this.get('', 'nextId');
     
     if (objects == null) {
