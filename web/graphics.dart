@@ -66,7 +66,7 @@ class BrainRenderer extends Renderer {
       context.closePath();
       
       Vector halfway = approach.delta / 2;
-      var label = 'distance: ${approach.delta.length().toStringAsFixed(2)} '
+      var label = 'distance: ${approach.delta.length.toStringAsFixed(2)} '
                   'approachSpeed: ${approach.approachSpeed.toStringAsFixed(2)}';
       context.fillText(label, 250 + halfway.x, 250 + halfway.y);
     }
@@ -77,7 +77,7 @@ class BrainRenderer extends Renderer {
     for (ObjectVisible object in reactor.objects) {
       var x = 250 + object.delta.x, y = 250 + object.delta.y;
 
-      var dir = object.velocity.normalized() * (object.radius + 3);
+      var dir = object.velocity.normalize() * (object.radius + 3);
 
       context.strokeStyle = 'rgba(255, 255, 0, ${1.0 - object.staleness / 3.0})';
 

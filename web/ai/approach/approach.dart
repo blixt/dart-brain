@@ -17,7 +17,7 @@ class ObjectApproaching extends Stimulation {
 class ApproachReactor extends Reactor {
   react(Stimulations stims) {
     for (ObjectVisible stim in stims.ofType(ObjectVisible)) {
-      var dist = stim.delta.length();
+      var dist = stim.delta.length;
   
       var prevDist = this.get(stim.objectId, 'dist');
       this.set(stim.objectId, 'dist', dist);

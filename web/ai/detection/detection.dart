@@ -85,12 +85,12 @@ class DetectorReactor extends Reactor {
       // TODO: Don't pick blips with a different radius.
       Vector v = object.getProjectedDelta();
       Blip closest = blips.reduce((a, b) {
-        var distA = (v - a.delta).length();
-        var distB = (v - b.delta).length();
+        var distA = (v - a.delta).length;
+        var distB = (v - b.delta).length;
         return distA < distB ? a : b;
       });
 
-      if ((v - closest.delta).length() < MAX_DISTANCE) {
+      if ((v - closest.delta).length < MAX_DISTANCE) {
         object.blip = closest;
         // TODO: If another object is projected to be even closer, the blip
         //       should be assigned to that one instead.

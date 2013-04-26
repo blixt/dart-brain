@@ -59,7 +59,7 @@ class Universe implements Iterable<Entity> {
       for (Entity other in _entities) {
         if (other == entity) continue;
         Vector delta = other.position - entity.position;
-        if (delta.length() <= BLIP_RANGE) {
+        if (delta.length <= BLIP_RANGE) {
           entity.brain.stimulations.stimulate(new Blip(delta, other.radius));
         }
       }
