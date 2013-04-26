@@ -7,7 +7,8 @@ An input/output AI model written in Dart.
 Getting started
 ---------------
 
-First of all, you need the Dart SDK. I suggest just [downloading and installing *DartEditor*][dartedit].
+First of all, you need the Dart SDK. I suggest just [downloading and installing *DartEditor*][dartedit], which includes
+everything you need.
 
 Then, clone this repository:
 
