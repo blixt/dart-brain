@@ -25,7 +25,9 @@ main() {
     u.addEntity(e);
   }
 
-  u.addEntity(new Entity(new Vector(250, 250), brain: b, radius: 5));
+  // The entity that represents the brain.
+  var be = new Entity(new Vector(250, 250), brain: b, orientation: PI / 2 , radius: 5);
+  u.addEntity(be);
 
   // Render the universe.
   var ur = new UniverseRenderer(u, query('#universe'));
@@ -37,6 +39,8 @@ main() {
 
   // Update the universe.
   new Timer.periodic(const Duration(milliseconds: 50), (Timer _) {
+    // Constantly rotate the brain entity clockwise.
+    be.orientation += 0.01;
     u.step();
   });
 }
