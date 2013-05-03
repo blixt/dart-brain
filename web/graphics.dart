@@ -1,3 +1,5 @@
+library main;
+
 import 'dart:html';
 import 'dart:math';
 

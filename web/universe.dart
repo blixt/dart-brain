@@ -1,3 +1,5 @@
+library main;
+
 import 'dart:math';
 
 import 'ai/ai.dart';
