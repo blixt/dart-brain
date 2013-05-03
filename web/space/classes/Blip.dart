@@ -1,4 +1,4 @@
-part of ai;
+part of space;
 
 class Blip extends Stimulation {
   final Vector delta;

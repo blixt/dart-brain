@@ -1,13 +1,12 @@
+library main;
+
 import 'dart:async';
 import 'dart:html';
 import 'dart:math';
 
-import 'ai/ai.dart';
-import 'ai/approach/approach.dart';
-import 'ai/detection/detection.dart';
-
-import 'universe.dart';
-import 'graphics.dart';
+import 'brain/brain.dart';
+import 'space/space.dart';
+import 'vector/vector.dart';
 
 main() {
   Brain b = new Brain();

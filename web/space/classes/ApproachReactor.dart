@@ -1,18 +1,4 @@
-library ai.approach;
-
-import '../ai.dart';
-import '../detection/detection.dart';
-
-class ObjectApproaching extends Stimulation {
-  final int objectId;
-  final Vector delta;
-  final Vector velocity;
-  final num approachSpeed;
-  
-  ObjectApproaching(this.objectId, this.delta, this.velocity, this.approachSpeed);
-  
-  toString() => 'ObjectApproaching(objectId=$objectId, delta=$delta, velocity=$velocity, approachSpeed=$approachSpeed)';
-}
+part of space;
 
 class ApproachReactor extends Reactor {
   react(Stimulations stims) {

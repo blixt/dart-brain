@@ -1,4 +1,4 @@
-part of ai;
+part of brain;
 
 class Brain {
   final List<Reactor> reactors = <Reactor>[];

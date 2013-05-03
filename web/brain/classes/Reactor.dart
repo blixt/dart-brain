@@ -1,4 +1,4 @@
-part of ai;
+part of brain;
 
 abstract class Reactor {
   final Map<dynamic, Map<String, dynamic>> memory = new Map<dynamic, Map<String, dynamic>>();

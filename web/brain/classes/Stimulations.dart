@@ -1,7 +1,4 @@
-part of ai;
-
-abstract class Stimulation {
-}
+part of brain;
 
 class Stimulations implements Iterable<Stimulation> {
   const int MAX_STIMULATIONS = 1000;
