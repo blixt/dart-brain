@@ -1,6 +1,6 @@
 library brain;
 
-import '../vector/vector.dart';
+import 'dart:collection';
 
 part 'classes/Brain.dart';
 part 'classes/Reactor.dart';

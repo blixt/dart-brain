@@ -1,7 +1,7 @@
 part of space;
 
-class Universe implements Iterable<Entity> {
-  const num BLIP_RANGE = 200;
+class Universe extends IterableBase<Entity> {
+  static const num BLIP_RANGE = 200;
   
   final List<Entity> _entities = <Entity>[];
   final Vector size;

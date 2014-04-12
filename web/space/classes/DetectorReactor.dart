@@ -1,8 +1,8 @@
 part of space;
 
 class DetectorReactor extends Reactor {
-  const int MAX_DISTANCE = 10;
-  const int MAX_INACTIVITY = 3;
+  static const int MAX_DISTANCE = 10;
+  static const int MAX_INACTIVITY = 3;
   
   react(Stimulations stims) {
     // Get all Blip stimulations.

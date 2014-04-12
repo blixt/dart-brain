@@ -1,7 +1,7 @@
 part of brain;
 
-class Stimulations implements Iterable<Stimulation> {
-  const int MAX_STIMULATIONS = 1000;
+class Stimulations extends IterableBase<Stimulation> {
+  static const int MAX_STIMULATIONS = 1000;
   
   int _counter = 0;
   List<Stimulation> _input = <Stimulation>[];
@@ -12,6 +12,7 @@ class Stimulations implements Iterable<Stimulation> {
   /// Whether there are more stimulations to handle after the current set of
   /// stimulations.
   bool get hasMore => _output.length > 0;
+
   /// An iterator over the available stimulations.
   Iterator<Stimulation> get iterator => _input.iterator;
   

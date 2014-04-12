@@ -4,7 +4,7 @@ abstract class Renderer {
   final CanvasElement _canvas;
   bool _rendering = false;
   
-  CanvasRenderingContext2D get context => _canvas.context2d;
+  CanvasRenderingContext2D get context => _canvas.context2D;
   
   Renderer(this._canvas);
   

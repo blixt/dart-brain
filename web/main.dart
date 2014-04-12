@@ -25,15 +25,15 @@ main() {
   }
 
   // The entity that represents the brain.
-  var be = new Entity(new Vector(250, 250), brain: b, orientation: PI / 2 , radius: 5);
+  var be = new Entity(new Vector(250, 250), brain: b, orientation: PI / 2, radius: 5);
   u.addEntity(be);
 
   // Render the universe.
-  var ur = new UniverseRenderer(u, query('#universe'));
+  var ur = new UniverseRenderer(u, querySelector('#universe'));
   ur.start();
 
   // Render the brain.
-  var br = new BrainRenderer(b, query('#brain'));
+  var br = new BrainRenderer(b, querySelector('#brain'));
   br.start();
 
   // Update the universe.

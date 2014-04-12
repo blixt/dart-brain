@@ -1,5 +1,6 @@
 library space;
 
+import 'dart:collection';
 import 'dart:html';
 import 'dart:math';
 
