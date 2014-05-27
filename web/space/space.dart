@@ -7,15 +7,19 @@ import 'dart:math';
 import '../brain/brain.dart';
 import '../vector/vector.dart';
 
-part 'classes/ApproachReactor.dart';
-part 'classes/Blip.dart';
-part 'classes/BrainRenderer.dart';
-part 'classes/BrainRendererReactor.dart';
-part 'classes/DetectorReactor.dart';
-part 'classes/Entity.dart';
-part 'classes/ObjectApproaching.dart';
-part 'classes/ObjectMeta.dart';
-part 'classes/ObjectVisible.dart';
-part 'classes/Renderer.dart';
-part 'classes/Universe.dart';
-part 'classes/UniverseRenderer.dart';
+part 'graphics/BrainRenderer.dart';
+part 'graphics/Renderer.dart';
+part 'graphics/UniverseRenderer.dart';
+
+part 'models/Entity.dart';
+part 'models/ObjectMeta.dart';
+
+part 'reactors/ApproachReactor.dart';
+part 'reactors/BrainRendererReactor.dart';
+part 'reactors/DetectorReactor.dart';
+
+part 'stimulations/Blip.dart';
+part 'stimulations/ObjectApproaching.dart';
+part 'stimulations/ObjectVisible.dart';
+
+part 'Universe.dart';
